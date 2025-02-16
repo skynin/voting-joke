@@ -7,10 +7,10 @@ import worker from '../src/index';
 // `Request` to pass to `worker.fetch()`.
 const IncomingRequest = Request<unknown, IncomingRequestCfProperties>;
 
-const helloString = 'Hello World! (from voting-joke)';
+const helloString = 'Hello Hono!';
 
-describe('Hello World worker', () => {
-	it('responds with Hello World! (unit style)', async () => {
+describe('index worker', () => {
+	it('responds from the root (unit style)', async () => {
 		const request = new IncomingRequest('http://example.com');
 		// Create an empty context to pass to `worker.fetch()`.
 		const ctx = createExecutionContext();
@@ -20,8 +20,20 @@ describe('Hello World worker', () => {
 		expect(await response.text()).toMatchInlineSnapshot(`"${helloString}"`);
 	});
 
-	it('responds with Hello World! (integration style)', async () => {
+	it('responds from the root (integration style)', async () => {
 		const response = await SELF.fetch('https://example.com');
 		expect(await response.text()).toMatchInlineSnapshot(`"${helloString}"`);
+	});
+});
+
+describe('api worker', () => {
+	it('responds api get joke (unit style)', async () => {
+		const request = new IncomingRequest('http://example.com/api/joke');
+		// Create an empty context to pass to `worker.fetch()`.
+		const ctx = createExecutionContext();
+		const response = await worker.fetch(request, env, ctx);
+		// Wait for all `Promise`s passed to `ctx.waitUntil()` to settle before running test assertions
+		await waitOnExecutionContext(ctx);
+		expect(await response.text()).toMatchInlineSnapshot(`"It's joke!"`);
 	});
 });
