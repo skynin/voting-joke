@@ -4,9 +4,8 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "npm run build-pages",
+		"build": "vite build",
 		"build-pages": "vite build",
-		"build-function": "wrangler pages",
 		"deploy": "wrangler pages deploy ./dist",
 		"dev": "vite",
 		"start": "wrangler pages dev",
