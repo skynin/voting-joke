@@ -1,11 +1,15 @@
 //import React from 'react'
 import { useState } from 'react'
+import './Joke.tsx'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Joke from './Joke.js'
 
 function App() {
   const [count, setCount] = useState(0)
+
+	const countFunc = () => setCount((count) => count + 1)
 
   return (
     <>
@@ -19,9 +23,10 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={countFunc}>
           count is {count}
         </button>
+				<Joke countFunc={countFunc}/>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>

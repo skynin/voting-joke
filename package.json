@@ -6,10 +6,10 @@
 	"scripts": {
 		"build": "npm run build-pages && npm run build-function",
 		"build-pages": "vite build",
-		"build-function": "vite build --mode page-function",
+		"build-function": "wrangler pages",
 		"deploy": "wrangler pages deploy ./dist",
 		"dev": "vite",
-		"start": "wrangler dev",
+		"start": "wrangler pages dev",
 		"test": "vitest",
 		"cf-typegen": "wrangler types",
 		"preview": "vite preview"
